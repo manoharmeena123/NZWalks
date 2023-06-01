@@ -19,6 +19,8 @@ namespace NZWalks.API.Controllers
         }
 
 
+
+
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
