@@ -19,7 +19,9 @@ namespace NZWalks.API.Controllers
             this.regionRepository = regionRepository;
             this.mapper = mapper;
         }
+  
 
+     
         [HttpGet]
         public IActionResult GetallRegions()
         {
