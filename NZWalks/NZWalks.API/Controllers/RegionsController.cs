@@ -23,10 +23,10 @@ namespace NZWalks.API.Controllers
 
      
         [HttpGet]
-        public IActionResult GetallRegions()
+        public async IActionResult GetallRegions()
         {
             
-            var  regions  = regionRepository.GetAll();
+            var  regions  =await regionRepository.GetAllAsync();
 
             //return DTO
             //var regionsDTO = new List<Models.DTO.Region>();
