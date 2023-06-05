@@ -10,5 +10,6 @@
         public double Lat { get; set; }
         public double Long { get; set; }
         public long Population { get; set; }
+        
     }
 }
