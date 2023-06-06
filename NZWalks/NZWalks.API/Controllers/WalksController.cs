@@ -76,8 +76,10 @@ namespace NZWalks.API.Controllers
 
 
 
-        //Update==================================================================>
 
+
+        //Update==================================================================>
+        
         [HttpPut]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateWalkAsync([FromRoute] Guid id, 
@@ -115,7 +117,7 @@ namespace NZWalks.API.Controllers
 
 
         //Delete==================================================================>
-        
+
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteWalkAsync(Guid id)
