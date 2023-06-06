@@ -113,9 +113,9 @@ namespace NZWalks.API.Controllers
         }
 
 
+
         //Delete==================================================================>
-
-
+        
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteWalkAsync(Guid id)
