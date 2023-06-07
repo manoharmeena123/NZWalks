@@ -7,5 +7,6 @@ namespace NZWalks.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        
     }
 }
