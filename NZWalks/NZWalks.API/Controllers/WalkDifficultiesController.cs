@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NZWalks.API.Data;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Repositories;
 
@@ -9,7 +7,7 @@ namespace NZWalks.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WalkDifficultiesController : Controller
+    public class WalkDifficultiesController : ControllerBase
     {
         private readonly IWalkDifficultyRepository walkDifficultyRepository;
         private readonly IMapper mapper;
@@ -24,9 +22,9 @@ namespace NZWalks.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWalkDifficultiesAsync()
         {
-          var walkDifficultyDomain = await walkDifficultyRepository.GetAllAsync();
-;
-            if(walkDifficultyDomain == null)
+            var walkDifficultyDomain = await walkDifficultyRepository.GetAllAsync();
+            ;
+            if (walkDifficultyDomain == null)
             {
                 return NotFound();
             }
@@ -60,6 +58,13 @@ namespace NZWalks.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddWalkDifficultyAsync(AddWalkDifficultyRequest addWalkDifficultyRequest)
         {
+
+            //Validation
+
+            //if (!ValidateWalkDifficulty(addWalkDifficultyRequest))
+            //{
+            //    return BadRequest(ModelState);
+            //}
             //Convert DTO to Domain Model
             var walkDifficultyDomain = new Models.Domain.WalkDifficulty
             {
@@ -71,7 +76,7 @@ namespace NZWalks.API.Controllers
 
             //Convert Domain to  Dto
             var WalkDifficultyDTO = mapper.Map<Models.DTO.WalkDifficulty>(walkDifficultyDomain);
-            return CreatedAtAction(nameof(GetAllWalkDifficultiesByIdAsync), new {id = WalkDifficultyDTO.Id}, WalkDifficultyDTO);
+            return CreatedAtAction(nameof(GetAllWalkDifficultiesByIdAsync), new { id = WalkDifficultyDTO.Id }, WalkDifficultyDTO);
         }
 
 
@@ -79,8 +84,13 @@ namespace NZWalks.API.Controllers
         [HttpPut]
         [Route("{id:Guid}")]
 
-        public async  Task<IActionResult> UpdateWalkDifficultyAsync(Guid id, UpdateWalkDifficultyRequest updateWalkDifficultyRequest)
+        public async Task<IActionResult> UpdateWalkDifficultyAsync(Guid id, UpdateWalkDifficultyRequest updateWalkDifficultyRequest)
         {
+            // Validation
+            //if (!ValidateUpdateWalkDifficultyAsync(updateWalkDifficultyRequest))
+            //{
+            //    return BadRequest(ModelState);
+            //}
             // Convert DTO to Domain  Models
             var walkDifficultyDomain = new Models.Domain.WalkDifficulty
             {
@@ -88,8 +98,8 @@ namespace NZWalks.API.Controllers
             };
 
             //Call repository to update
-            walkDifficultyDomain =  await walkDifficultyRepository.UpdateAsync(id, walkDifficultyDomain);
-            if(walkDifficultyDomain == null)
+            walkDifficultyDomain = await walkDifficultyRepository.UpdateAsync(id, walkDifficultyDomain);
+            if (walkDifficultyDomain == null)
             {
                 return NotFound();
             }
@@ -110,14 +120,64 @@ namespace NZWalks.API.Controllers
         {
             //find the id
             var walkDifficultyDomain = await walkDifficultyRepository.DeleteAsync(id);
-            if(walkDifficultyDomain == null)
+            if (walkDifficultyDomain == null)
             {
-                return NotFound();  
+                return NotFound();
             }
 
             // Convert To DTO
             var WalkDifficultyDTO = mapper.Map<Models.DTO.WalkDifficulty>(walkDifficultyDomain);
             return Ok(WalkDifficultyDTO);
         }
+
+        #region Private methods
+        //PostValidation
+        //public bool ValidateWalkDifficulty(AddWalkDifficultyRequest addWalkDifficultyRequest)
+        //{
+        //    if (addWalkDifficultyRequest == null)
+        //    {
+        //        ModelState.AddModelError(nameof(addWalkDifficultyRequest),
+        //           $"walkdifficulty is required.");
+        //        return false;
+
+        //    }
+        //    if (string.IsNullOrWhiteSpace(addWalkDifficultyRequest.Code))
+        //    {
+        //        ModelState.AddModelError(nameof(addWalkDifficultyRequest.Code),
+        //               $"{nameof(addWalkDifficultyRequest.Code)} is required");
+        //    }
+
+        //    if (ModelState.ErrorCount > 0)
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+        //PutValidation
+
+        //public bool ValidateUpdateWalkDifficultyAsync(Models.DTO.UpdateWalkDifficultyRequest updateWalkDifficultyRequest)
+        //{
+        //    if (updateWalkDifficultyRequest == null)
+        //    {
+        //        ModelState.AddModelError(nameof(updateWalkDifficultyRequest),
+        //           $"WalkDifficulty is required.");
+        //        return false;
+
+        //    }
+        //    if (string.IsNullOrWhiteSpace(updateWalkDifficultyRequest.Code))
+        //    {
+        //        ModelState.AddModelError(nameof(updateWalkDifficultyRequest.Code),
+        //            $"{nameof(updateWalkDifficultyRequest.Code)} is required");
+        //    }
+
+        //    if (ModelState.ErrorCount > 0)
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+        #endregion
     }
 }
