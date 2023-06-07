@@ -11,7 +11,6 @@ namespace NZWalks.API.Repositories
         public RegionRepository(NZWalksDbContext nZWalksDbContext)
         {
             this.nZWalksDbContext = nZWalksDbContext;
-            
         }
 
 
@@ -24,7 +23,6 @@ namespace NZWalks.API.Repositories
         public  async Task<Region> GetAsync(Guid id)
         {
          return await nZWalksDbContext.Region.FirstOrDefaultAsync(x => x.Id == id);
-         
 
         }
 
