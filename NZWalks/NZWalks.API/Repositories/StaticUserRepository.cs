@@ -20,6 +20,7 @@ namespace NZWalks.API.Repositories
                 Password = "readonly",
                 Roles = new List<string>{"reader"}
             },
+            
             new User()
             {
                 FirstName = "Read Write",
