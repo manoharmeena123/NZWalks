@@ -48,7 +48,7 @@ namespace NZWalks.API.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Length = table.Column<double>(type: "float", nullable: false),
                     RegionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WalkDifficulty = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                  //  WalkDifficulty = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     walkDifficultyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Repositories;
+using System.Data;
 
 namespace NZWalks.API.Controllers
 {
@@ -24,6 +26,7 @@ namespace NZWalks.API.Controllers
         }
         //GETAll==================================================================>
         [HttpGet]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetAllWalksAsync()
         {
             //Fetch DATA FROM   DATABASE- DOMAIN WALKS
@@ -38,6 +41,7 @@ namespace NZWalks.API.Controllers
         //GETById==================================================================>
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetWalkByIdAsync(Guid id)
         {
             // Get Domain object from database
@@ -52,6 +56,7 @@ namespace NZWalks.API.Controllers
 
         //Post==================================================================>
         [HttpPost]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> AddWalkAsync([FromBody]  Models.DTO.AddWalkRequest addWalkRequest)
         {
             //Validate 
@@ -93,6 +98,7 @@ namespace NZWalks.API.Controllers
         
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> UpdateWalkAsync([FromRoute] Guid id, 
             [FromBody] Models.DTO.UpdateWalkRequest updateWalkRequest)
         {
@@ -136,6 +142,7 @@ namespace NZWalks.API.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteWalkAsync(Guid id)
         {
             // Call Repository to Delete walk
