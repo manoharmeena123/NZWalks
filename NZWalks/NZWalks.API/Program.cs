@@ -59,7 +59,7 @@ builder.Services.AddScoped<ITokenHandler, NZWalks.API.Repositories.TokenHandler>
 
 
 //UserInjection
-builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 
