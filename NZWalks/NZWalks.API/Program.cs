@@ -29,6 +29,17 @@ builder.Services.AddDbContext<NZWalksDbContext>(options =>
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped <IWalkRepository, WalkRepository> ();
 builder.Services.AddScoped<IWalkDifficultyRepository, WalkDifficultyRepository>();
+ 
+//Auth
+builder.Services.AddScoped<ITokenHandler, NZWalks.API.Repositories.TokenHandler>();
+
+
+//UserInjection
+builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
+
+
+
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
