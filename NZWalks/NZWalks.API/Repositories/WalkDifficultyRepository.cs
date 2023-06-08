@@ -12,7 +12,9 @@ namespace NZWalks.API.Repositories
         {
             this.nZWalksDbContext = nZWalksDbContext;
         }
+  
 
+   
         public async Task<WalkDifficulty> AddAsync(WalkDifficulty walkDifficulty)
         {
             walkDifficulty.Id = Guid.NewGuid();
